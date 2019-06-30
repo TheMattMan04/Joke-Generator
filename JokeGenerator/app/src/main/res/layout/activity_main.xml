@@ -29,6 +29,7 @@
         android:layout_marginEnd="-24dp"
         android:layout_marginRight="-24dp"
         android:layout_marginBottom="37dp"
+        android:scrollbars = "vertical"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textStyle="bold" />
 

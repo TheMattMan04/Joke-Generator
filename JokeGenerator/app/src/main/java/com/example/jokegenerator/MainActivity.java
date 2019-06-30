@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 joke = response.body().getJoke();
 
                 jokeTextBox = findViewById(R.id.jokeTextBox);
+                jokeTextBox.setMovementMethod(new ScrollingMovementMethod());
                 jokeTextBox.setText(joke);
             }
 

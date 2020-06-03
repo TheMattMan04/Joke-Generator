@@ -7,9 +7,7 @@ public class Joke {
     @SerializedName("joke")
     private String joke;
 
-    public Joke() {
-
-    }
+    public Joke() { }
 
     public Joke(String joke) {
         this.joke = joke;

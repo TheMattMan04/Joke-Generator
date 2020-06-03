@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Joke Generator</string>
+    <string name="tell_joke">Tell Joke</string>
+    <string name="joke_history">Joke History</string>
+    <string name="app_title">Joke Generator</string>
 </resources>

@@ -1,7 +1,10 @@
 package com.example.jokegenerator;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -9,6 +12,9 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,8 +25,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
     private TextView jokeTextBox;
     private Button jokeButton;
-
     private String joke;
+    private ArrayList<String> jokesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,16 +34,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         jokeButton = findViewById(R.id.getJokeButton);
-
-        jokeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                retrieveJoke();
-            }
-        });
+        jokesList = new ArrayList<String>();
     }
 
-    private void retrieveJoke() {
+    public void retrieveJoke(View view) {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
                 jokeTextBox = findViewById(R.id.jokeTextBox);
                 jokeTextBox.setMovementMethod(new ScrollingMovementMethod());
                 jokeTextBox.setText(joke);
+
+                jokesList.add(joke);
             }
 
             @Override
@@ -66,5 +68,16 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Internet connection required to generate joke", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void goToJokeHistory(View view) {
+        Intent intent = new Intent(MainActivity.this, SearchHistoryActivity.class);
+        intent.putStringArrayListExtra("jokesList", jokesList);
+
+        startActivity(intent);
+    }
+
+    public List<String> getJokesList() {
+        return jokesList;
     }
 }
